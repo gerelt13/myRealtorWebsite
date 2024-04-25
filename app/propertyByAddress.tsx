@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Properties } from "./properties";
+import { Property } from "./property";
 
 export const PropertyByAddress = () => {
   const [data, setData] = useState();
@@ -8,7 +8,8 @@ export const PropertyByAddress = () => {
   useEffect(() => {
     if (selectedPropertyAddress) {
       fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/properties/address/${selectedPropertyAddress}`, {
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/properties/address/${selectedPropertyAddress}`,
+        {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -62,7 +63,7 @@ export const PropertyByAddress = () => {
       <br />
       <br />
 
-      {data && <Properties property={data[0]} />}
+      {data && <Property property={data[0]} />}
     </div>
   );
 };

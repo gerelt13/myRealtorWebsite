@@ -1,8 +1,7 @@
 "use client";
 import { Button, Stack, TextField } from "@mui/material";
 import { useRouter } from "next/navigation";
-
-import { ChangeEventHandler, useState } from "react";
+import { useState } from "react";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -11,17 +10,19 @@ export default function Register() {
 
   const handleRegister = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/register`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        }
+      );
       if (res.status == 200) {
         const data = await res.json();
         localStorage.setItem("token", data.token);
-        console.log(data);
         router.push("/");
       } else if (res.status == 401) {
         throw new Error("Unauthorized");
@@ -30,8 +31,6 @@ export default function Register() {
       console.error(error);
     }
   };
-
-  
 
   return (
     <Stack
@@ -43,7 +42,7 @@ export default function Register() {
       <TextField
         style={{ width: "500px" }}
         label="Email Address"
-        onChange={(event) => setUseName(event.target.value)}
+        onChange={(event) => setEmail(event.target.value)}
       />
       <TextField
         style={{ width: "500px" }}

@@ -1,26 +1,21 @@
-import Link from "next/link";
-import { Interface } from "readline";
-
-interface Property {
-  _id: String;
-  address: String;
-  city: String;
-  brokers: String;
-  price: Number;
-  bedrooms: String[];
-  bathrooms: String[];
-  sqft: Number;
-  description: String;
-  image_url: String;
+export interface Property {
+  _id: string;
+  address: string;
+  city: string;
+  brokers: string;
+  price: number;
+  bedrooms: number;
+  bathrooms: number;
+  sqft: number;
+  description: string;
+  image_url?: string;
 }
 
 interface Props {
   property: Property;
 }
 
-export const Properties = ({ property }: Props) => {
-  console.log(property);
-
+export const Property = ({ property }: Props) => {
   return (
     <div
       style={{
@@ -30,7 +25,7 @@ export const Properties = ({ property }: Props) => {
         border: "1px solid",
       }}
     >
-      <p id="anyID"></p>
+      <p id="anyID">ID: {property._id}</p>
       <h1>Address: {property.address}</h1>
       <h1>City: {property.city}</h1>
       <h1>Brokers: {property.brokers}</h1>

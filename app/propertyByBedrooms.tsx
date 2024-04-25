@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Properties } from "./properties";
+import { useEffect, useState } from "react";
+import { Property } from "./property";
 
 export const PropertyByBedrooms = () => {
   const [data, setData] = useState();
@@ -61,7 +61,7 @@ export const PropertyByBedrooms = () => {
       <br />
       <br />
 
-      {data && <Properties property={data[0]} />}
+      {data && <Property property={data[0]} />}
     </div>
   );
 };

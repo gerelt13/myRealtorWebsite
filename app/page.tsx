@@ -1,37 +1,23 @@
 "use client";
-import { useEffect, useState, SyntheticEvent } from "react";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import { Properties } from "./properties";
-import { SingleProperty } from "./singleProperty";
-import { PropertyByCity } from "./propertyByCity";
-import { PropertyByBedrooms } from "./propertyByBedrooms";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
+import Typography from "@mui/material/Typography";
+import { SyntheticEvent, useEffect, useState } from "react";
+import { Property } from "./property";
 import { PropertyByAddress } from "./propertyByAddress";
-
+import { PropertyByBedrooms } from "./propertyByBedrooms";
+import { PropertyByCity } from "./propertyByCity";
+import { SingleProperty } from "./singleProperty";
 import { useRouter } from "next/navigation";
-import { Edit } from "./edit/page";
-import { Delete } from "@mui/icons-material";
+import { Edit } from "./editProperty";
+import { Button, CircularProgress } from "@mui/material";
+import DeleteProperty from "./deleteProperty";
 
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
   value: number;
-}
-
-interface Property {
-  _id: { common: string | number };
-  address: { common: string | number };
-  city: string;
-  zipCode: number;
-  brokers: string;
-  price: number;
-  bedrooms: string;
-  bathrooms: number;
-  sqft: number;
-  description: { common: string | number };
-  imageUrl: boolean | string;
 }
 
 function CustomTabPanel(props: TabPanelProps) {
@@ -70,17 +56,18 @@ export default function BasicTabs() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<Property[]>([]);
 
-  const [error, setError] = useState(false);
+  const [error, setError] = useState();
   const router = useRouter();
 
   useEffect(() => {
     setLoading(true);
     const token = localStorage.getItem("token");
-    if (!token) {
-      setError(true);
-      setLoading(false);
+
+    if (token === null) {
+      router.push("/login");
       return;
     }
+
     fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/properties`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -88,14 +75,11 @@ export default function BasicTabs() {
     })
       .then(async (res) => {
         if (res.status === 401) {
-          console.log(res.status);
           throw new Error("Unauthorized: Invalid token");
         }
         if (res.status === 500) {
           throw new Error("Server Error: Failed to fetch");
         }
-        console.log(res.status);
-
         if (!res.ok) {
           throw new Error("Failed to fetch");
         }
@@ -103,9 +87,7 @@ export default function BasicTabs() {
         setData(data);
       })
       .catch((error) => {
-        router.push("/login");
-        setError(true);
-        console.error(error.message);
+        setError(error.message);
       })
       .finally(() => {
         setLoading(false);
@@ -127,7 +109,7 @@ export default function BasicTabs() {
           alignItems: "center",
         }}
       >
-        <h1>Loading...</h1>
+        <CircularProgress />
       </div>
     );
   }
@@ -145,7 +127,7 @@ export default function BasicTabs() {
           alignItems: "center",
         }}
       >
-        <h1>There is error or Timeout occurs</h1>
+        <h1>{error}</h1>
       </div>
     );
   }
@@ -179,18 +161,20 @@ export default function BasicTabs() {
     <Box
       sx={{
         minHeight: "100vh",
-        
-          backgroundImage: "url(/houseBlueRealtor.jpg)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-  
-      
+
+        backgroundImage: "url(/houseBlueRealtor.jpg)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+
         display: "flex",
         flexDirection: "column",
         alignContent: "center",
       }}
     >
       <Box
+        pt="20px"
+        px="10px"
+        justifyContent="space-between"
         sx={{
           borderBottom: "1px",
           borderColor: "solid",
@@ -210,23 +194,11 @@ export default function BasicTabs() {
           <Tab label="Property by address" {...a11yProps(4)} />
           <Tab label="Edit" {...a11yProps(5)} />
           <Tab label="Delete" {...a11yProps(5)} />
-
         </Tabs>
-      </Box>
 
-      <Box>
-        <button
-          style={{
-            borderRadius: 2,
-
-            width: 1700,
-            fontSize: 20,
-            textAlign: "center",
-          }}
-          onClick={handleSignOut}
-        >
+        <Button variant="contained" onClick={handleSignOut}>
           Sign Out
-        </button>
+        </Button>
       </Box>
 
       <CustomTabPanel value={value} index={0}>
@@ -238,19 +210,18 @@ export default function BasicTabs() {
             gap: "25px",
           }}
         >
-          {(data as Property[]).map((property: Property) => (
-            <Box key={property._id}>
-              <Box
-                sx={{
-                  borderRadius: 2,
-                  p: 2,
-                  width: 350,
-                  fontSize: 20,
-                  textAlign: "center",
-                }}
-              >
-                <Properties property={property}></Properties>
-              </Box>
+          {(data as Property[]).map((property: Property, index) => (
+            <Box
+              sx={{
+                borderRadius: 2,
+                p: 2,
+                width: 350,
+                fontSize: 20,
+                textAlign: "center",
+              }}
+              key={index}
+            >
+              <Property property={property} />
             </Box>
           ))}
         </div>
@@ -276,7 +247,7 @@ export default function BasicTabs() {
         <Edit />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={6}>
-        <Delete />
+        <DeleteProperty />
       </CustomTabPanel>
     </Box>
   );

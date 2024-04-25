@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Properties } from "./properties";
+import { Property } from "./property";
 
 export const PropertyByCity = () => {
   const [data, setData] = useState();
@@ -7,12 +7,15 @@ export const PropertyByCity = () => {
 
   useEffect(() => {
     if (selectedPropertyCity) {
-      fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/properties/city/${selectedPropertyCity}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      }).then(async (res) => {
+      fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/properties/city/${selectedPropertyCity}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      ).then(async (res) => {
         const data = await res.json();
         setData(data);
       });
@@ -61,7 +64,7 @@ export const PropertyByCity = () => {
       <br />
       <br />
 
-      {data && <Properties property={data[0]} />}
+      {data && <Property property={data[0]} />}
     </div>
   );
 };

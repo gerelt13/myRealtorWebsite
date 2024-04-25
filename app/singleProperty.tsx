@@ -1,18 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { Properties } from "./properties";
+import { useEffect, useState } from "react";
+import { Property } from "./property";
 
 export const SingleProperty = () => {
   const [data, setData] = useState();
-  const [selectedPropertyId, setSelectedPropertyId] = useState(null);
+  const [selectedPropertyId, setSelectedPropertyId] = useState();
 
   useEffect(() => {
     if (selectedPropertyId) {
-      fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/properties/${selectedPropertyId}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      }).then(async (res) => {
+      fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/properties/${selectedPropertyId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      ).then(async (res) => {
         const data = await res.json();
         setData(data);
       });
@@ -66,7 +69,7 @@ export const SingleProperty = () => {
       <br />
       <br />
 
-      {data && <Properties property={data[0]} />}
+      {data && <Property property={data[0]} />}
     </div>
   );
 };
