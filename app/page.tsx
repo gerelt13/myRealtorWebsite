@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 import { Edit } from "./editProperty";
 import { Button, CircularProgress } from "@mui/material";
 import DeleteProperty from "./deleteProperty";
+import CreateProperty from "./createProperty";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -193,7 +194,9 @@ export default function BasicTabs() {
           <Tab label="Property by bedrooms" {...a11yProps(3)} />
           <Tab label="Property by address" {...a11yProps(4)} />
           <Tab label="Edit" {...a11yProps(5)} />
-          <Tab label="Delete" {...a11yProps(5)} />
+          <Tab label="Delete" {...a11yProps(6)} />
+          <Tab label="Create Property" {...a11yProps(7)} />
+
         </Tabs>
 
         <Button variant="contained" onClick={handleSignOut}>
@@ -248,6 +251,9 @@ export default function BasicTabs() {
       </CustomTabPanel>
       <CustomTabPanel value={value} index={6}>
         <DeleteProperty />
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={7}>
+        <CreateProperty />
       </CustomTabPanel>
     </Box>
   );

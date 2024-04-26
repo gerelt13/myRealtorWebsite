@@ -90,10 +90,19 @@ const Properties = ({ property }: { property: Property }) => {
       />
       <br />
 
-      <label htmlFor="Price">Bathrooms:</label>
+      <label htmlFor="Bedrooms">Bedrooms:</label>
       <input
         type="number"
-        id="Price"
+        id="Bedrooms"
+        value={bedrooms}
+        onChange={(event) => setBedrooms(Number(event.target.value))}
+      />
+      <br />
+
+      <label htmlFor="Bathrooms">Bathrooms:</label>
+      <input
+        type="number"
+        id="Bathrooms"
         value={bathrooms}
         onChange={(event) => setBathrooms(Number(event.target.value))}
       />
