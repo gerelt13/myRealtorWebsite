@@ -25,9 +25,13 @@ export const PropertyByAddress = () => {
     setSelectedPropertyAddress(event.target.value);
   };
 
+<img src={Property.image_url || "https://images.alphacoders.com/462/462296.jpg"} alt="Property Image"/> 
+
+
   return (
     <div
       style={{
+        marginTop: "100px",
         boxShadow: "5px 10px #888888",
         backgroundColor: "white",
         borderRadius: "5px",

@@ -39,7 +39,7 @@ export default function ForgotPassword() {
         backgroundPosition: "center",
       }}
     >
-      <Typography>Enter your email to forgot password</Typography>
+      <Typography>Enter your email</Typography>
       <TextField
         style={{ width: "500px" }}
         label="Email"

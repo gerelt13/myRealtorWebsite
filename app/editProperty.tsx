@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Property } from "./property";
-import { Button } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 
 const Properties = ({ property }: { property: Property }) => {
   const [InputEditAddress, SetInputEditAddress] = useState<string>(
@@ -53,79 +53,160 @@ const Properties = ({ property }: { property: Property }) => {
   };
 
   return (
-    <div>
-      <label htmlFor="address">Address:</label>
-      <input
-        type="text"
-        id="address"
-        value={InputEditAddress}
-        onChange={(event) => SetInputEditAddress(event.target.value)}
-      />
+    <div
+      style={{
+        display: "flow",
+        gap: "5px",
+        padding: "10px",
+        marginTop: "140px",
+        paddingLeft: "100px",
+      }}
+    >
+      <div
+        style={{
+          border: "1px solid #ccc",
+          borderRadius: "5px",
+          padding: "5px",
+        }}
+      >
+        <label htmlFor="address">Address:</label>
+        <br />
+        <input
+          type="text"
+          id="address"
+          value={InputEditAddress}
+          onChange={(event) => SetInputEditAddress(event.target.value)}
+        />
+      </div>
+
+      <div
+        style={{
+          border: "1px solid #ccc",
+          borderRadius: "5px",
+          padding: "5px",
+        }}
+      >
+        <label htmlFor="city">City:</label>
+        <br />
+        <input
+          type="text"
+          id="city"
+          value={InputEditCity}
+          onChange={(event) => SetInputEditCity(event.target.value)}
+        />
+      </div>
+
+      <div
+        style={{
+          border: "1px solid #ccc",
+          borderRadius: "5px",
+          padding: "5px",
+        }}
+      >
+        <label htmlFor="brokers">Brokers:</label>
+        <br />
+        <input
+          type="text"
+          id="brokers"
+          value={InputEditBrokers}
+          onChange={(event) => SetInputEditBrokers(event.target.value)}
+        />
+      </div>
+
+      <div
+        style={{
+          border: "1px solid #ccc",
+          borderRadius: "5px",
+          padding: "5px",
+        }}
+      >
+        <label htmlFor="Price">Price:</label>
+        <br />
+        <input
+          type="number"
+          id="Price"
+          value={InputEditPrice}
+          onChange={(event) => SetInputEditPrice(Number(event.target.value))}
+        />
+      </div>
+
+      <div
+        style={{
+          border: "1px solid #ccc",
+          borderRadius: "5px",
+          padding: "5px",
+        }}
+      >
+        <label htmlFor="Bedrooms">Bedrooms:</label>
+        <br />
+        <input
+          type="number"
+          id="Bedrooms"
+          value={bedrooms}
+          onChange={(event) => setBedrooms(Number(event.target.value))}
+        />
+      </div>
+
+      <div
+        style={{
+          border: "1px solid #ccc",
+          borderRadius: "5px",
+          padding: "5px",
+        }}
+      >
+        <label htmlFor="Bathrooms">Bathrooms:</label>
+        <br />
+        <input
+          type="number"
+          id="Bathrooms"
+          value={bathrooms}
+          onChange={(event) => setBathrooms(Number(event.target.value))}
+        />
+      </div>
+
+      <div
+        style={{
+          border: "1px solid #ccc",
+          borderRadius: "5px",
+          padding: "5px",
+        }}
+      >
+        <label htmlFor="sqft">sqft:</label>
+        <br />
+        <input
+          type="number"
+          id="sqft"
+          value={InputEditSqft}
+          onChange={(event) => SetInputEditSqft(Number(event.target.value))}
+        />
+      </div>
+
+      <div
+        style={{
+          border: "1px solid #ccc",
+          borderRadius: "5px",
+          padding: "5px",
+        }}
+      >
+        <label htmlFor="description">description:</label>
+        <br />
+        <input
+          type="text"
+          id="description"
+          value={InputEditDescription}
+          onChange={(event) => SetInputEditDescription(event.target.value)}
+        />
+      </div>
+
       <br />
 
-      <label htmlFor="city">City:</label>
-      <input
-        type="text"
-        id="city"
-        value={InputEditCity}
-        onChange={(event) => SetInputEditCity(event.target.value)}
-      />
-      <br />
-
-      <label htmlFor="brokers">Brokers:</label>
-      <input
-        type="text"
-        id="brokers"
-        value={InputEditBrokers}
-        onChange={(event) => SetInputEditBrokers(event.target.value)}
-      />
-      <br />
-
-      <label htmlFor="Price">Price:</label>
-      <input
-        type="number"
-        id="Price"
-        value={InputEditPrice}
-        onChange={(event) => SetInputEditPrice(Number(event.target.value))}
-      />
-      <br />
-
-      <label htmlFor="Bedrooms">Bedrooms:</label>
-      <input
-        type="number"
-        id="Bedrooms"
-        value={bedrooms}
-        onChange={(event) => setBedrooms(Number(event.target.value))}
-      />
-      <br />
-
-      <label htmlFor="Bathrooms">Bathrooms:</label>
-      <input
-        type="number"
-        id="Bathrooms"
-        value={bathrooms}
-        onChange={(event) => setBathrooms(Number(event.target.value))}
-      />
-      <br />
-
-      <label htmlFor="sqft">sqft:</label>
-      <input
-        type="number"
-        id="sqft"
-        value={InputEditSqft}
-        onChange={(event) => SetInputEditSqft(Number(event.target.value))}
-      />
-      <br />
-
-      <label htmlFor="description">description:</label>
-      <input
-        type="text"
-        id="description"
-        value={InputEditDescription}
-        onChange={(event) => SetInputEditDescription(event.target.value)}
-      />
-      <br />
-      <Button onClick={editProperty}>Update</Button>
+      <Button
+        style={{ color: "black", backgroundColor: "#BCCEE1" }}
+        variant="contained"
+        onClick={editProperty}
+      >
+        Update
+      </Button>
     </div>
   );
 };
@@ -160,6 +241,7 @@ export const Edit = () => {
     <>
       <div
         style={{
+          marginTop: "100px",
           boxShadow: "5px 10px #888888",
           backgroundColor: "white",
           borderRadius: "5px",

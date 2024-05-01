@@ -126,6 +126,7 @@ export default function BasicTabs() {
           flexWrap: "wrap",
           justifyContent: "center",
           alignItems: "center",
+          borderRadius: "10px",
         }}
       >
         <h1>{error}</h1>
@@ -174,21 +175,40 @@ export default function BasicTabs() {
     >
       <Box
         pt="20px"
-        px="10px"
+        px="110px"
         justifyContent="space-between"
         sx={{
-          borderBottom: "1px",
-          borderColor: "solid",
           display: "flex",
+
+          backgroundColor: "#BCCEE1 ",
+          position: "fixed",
+
+          marginRight: "40px",
+          paddingBottom: "20px",
+          width: "100%",
+          border: "1px black",
+          marginTop: "10px",
         }}
       >
         <Tabs
-          style={{ fontSize: "44px", fontWeight: "bold" }}
           value={value}
           onChange={handleChange}
           aria-label="basic tabs example"
+          sx={{
+            "& .MuiTabs-flexContainer": {
+              justifyContent: "center",
+            },
+            "& .MuiTab-root": {
+              fontSize: "18px",
+              fontWeight: "bold",
+              textTransform: "none",
+            },
+            "& .Mui-selected": {
+              color: "white",
+            },
+          }}
         >
-          <Tab label="Properties" {...a11yProps(0)} />
+          <Tab label="All Properties" {...a11yProps(0)} />
           <Tab label=" Single Property" {...a11yProps(1)} />
           <Tab label="Property by city" {...a11yProps(2)} />
           <Tab label="Property by bedrooms" {...a11yProps(3)} />
@@ -196,7 +216,6 @@ export default function BasicTabs() {
           <Tab label="Edit" {...a11yProps(5)} />
           <Tab label="Delete" {...a11yProps(6)} />
           <Tab label="Create Property" {...a11yProps(7)} />
-
         </Tabs>
 
         <Button variant="contained" onClick={handleSignOut}>
@@ -216,7 +235,7 @@ export default function BasicTabs() {
           {(data as Property[]).map((property: Property, index) => (
             <Box
               sx={{
-                borderRadius: 2,
+                borderRadius: 8,
                 p: 2,
                 width: 350,
                 fontSize: 20,

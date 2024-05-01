@@ -30,6 +30,7 @@ export const PropertyByBedrooms = () => {
   return (
     <div
       style={{
+        marginTop: "100px",
         boxShadow: "5px 10px #888888",
         backgroundColor: "white",
         borderRadius: "5px",

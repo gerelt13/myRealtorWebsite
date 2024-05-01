@@ -24,7 +24,7 @@ const CreateProperty = () => {
     bathrooms: 0,
     sqft: 0,
     description: "",
-    image_url: "",
+    // image_url: "",
   });
 
   const createProperty = async (newProperty: Property) => {
@@ -63,10 +63,14 @@ const CreateProperty = () => {
 
   return (
 
-    <div>
-      <h1>Create Property</h1>
-      <Stack direction="row" gap="8px" pt="15px">
+<div style={{ marginTop: "100px", backgroundColor: "transparent", borderRadius:"4px",padding: "20px",boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)" }}>
+      <h1 style={{ color: "black" }}>Create Property</h1>
+      <div style={{ border: "2px solid grey", borderRadius:"4px", padding: "20px", backgroundColor: "#BCCEE1" , boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)" }}>
+
+
+      <Stack direction="row" gap="8px" pt="85px">  
         <TextField
+
           name="address"
           label="Address"
           variant="outlined"
@@ -128,18 +132,20 @@ const CreateProperty = () => {
           value={property.description}
           onChange={handlePropertyChange}
         />
-        <TextField
+        {/* <TextField
           name="image_url"
           label="Image URL"
           variant="outlined"
           value={property.image_url}
           onChange={handlePropertyChange}
-        />
+        /> */}
         <Button variant="contained" onClick={() => createProperty(property)}>
           Create property
         </Button>
       </Stack>
-    </div>
+    
+</div>
+</div>
 
     
   );

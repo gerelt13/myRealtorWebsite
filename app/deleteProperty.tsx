@@ -10,6 +10,7 @@ const DeleteProperty = () => {
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/properties/deletebyid/${id}`,
+
         {
           method: "DELETE",
           headers: {
@@ -40,12 +41,14 @@ const DeleteProperty = () => {
         <TextField
           onChange={handlePropertyChange}
           style={{
+            marginTop: "40px",
             backgroundColor: "white",
             overflow: "hidden",
             borderRadius: "8px",
           }}
         />
         <Button
+          style={{ marginTop: "40px" }}
           variant="contained"
           onClick={() => deleteProperty(selectedPropertyId)}
         >

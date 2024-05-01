@@ -23,7 +23,7 @@ export default function Register() {
       if (res.status == 200) {
         const data = await res.json();
         localStorage.setItem("token", data.token);
-        router.push("/");
+        router.push("/login");
       } else if (res.status == 401) {
         throw new Error("Unauthorized");
       }
@@ -39,6 +39,28 @@ export default function Register() {
       alignItems="center"
       height="100vh"
     >
+      <video
+        loop
+        muted
+        autoPlay
+        style={{
+          position: "absolute",
+          // top: 0,
+          // left: 0,
+          bottom: 0,
+          right: 0,
+
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+        }}
+      >
+        <source
+          src="https://cdn.pixabay.com/video/2023/03/06/153495-805688516_large.mp4"
+          type="video/mp4"
+        />
+      </video>
+
       <TextField
         style={{ width: "500px" }}
         label="Email Address"
@@ -51,7 +73,7 @@ export default function Register() {
         onChange={(event) => setPassword(event.target.value)}
       />
       <Button
-        style={{ width: "500px", backgroundColor: "red" }}
+        style={{ width: "500px", color: "black" }}
         variant="contained"
         onClick={handleRegister}
       >
